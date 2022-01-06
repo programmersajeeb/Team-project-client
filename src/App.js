@@ -1,57 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import { Box } from '@mui/material';
+import {
+  Route,
+  BrowserRouter,
+  Routes,
+} from "react-router-dom";
+import PrivateRoute from './Pages/Login/PrivateRoute/PrivateRoute';
+import Dashboard from './Pages/Dashboard/Dashboard/Dashboard';
+import Login from './Pages/Login/Login/Login';
+import Register from './Pages/Login/Register/Register';
+import Home from './Pages/Home/Home/Home';
+import ProductDetails from './Pages/ProductDetails/ProductDetails';
+import ExploreProducts from './Pages/ExploreProducts/ExploreProducts/ExploreProducts';
+import AuthProvider from './Contexts/AuthProvider/AuthProvider';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <Box>
+        <AuthProvider>
+        <BrowserRouter>
+          <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/exploreProducts" element={ 
+            <ExploreProducts />} />
+          <Route path="/dashboard/*" element={<Dashboard />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/productDetails/:ProductId" element={<ProductDetails />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
+    </Box>
   );
 }
 
